@@ -25,6 +25,23 @@ def compute_precision(classnum, data):
                 hit[classnum][j] += data[i][j]
     return hit[classnum] / total
 
+def tune_step(classnum, netnum, data, reduce):
+    pos = -1
+
+    if reduce:
+        min = 8
+        for i in range(interval[classnum], interval[classnum + 1]):
+            if (data[i][netnum] == 1) and (data[i][-5] < min):
+                pos = i
+                min = data[i][-5]
+    else:
+        max = 0
+        for i in range(interval[classnum], interval[classnum + 1]):
+            if (data[i][netnum] == 0) and (data[i][-5] > max):
+                pos = i
+                max = data[i][-5]
+    return pos
+
 with open('rafic10-result.csv','r', newline='') as file:
     file = csv.reader(file, delimiter=',')
     for row_list in file:
