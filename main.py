@@ -108,8 +108,8 @@ num[0] /= total # the rafic10 precision of class 0 on eight models
 num[1] = num[0] / ratio[0] # percentage of rafic10 on cifar10
 '''
 
-file_precision = open('final-precision.txt','w')
-file_mask = open('mask.txt', 'w')
+file_precision = open('final-precision.csv','w')
+file_mask = open('mask.csv', 'w')
 for num in range(10):
     diff = 8
     for i in range(interval[1] - interval[0]):
