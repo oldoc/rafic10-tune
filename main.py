@@ -2,7 +2,7 @@ import csv
 import numpy as np
 from numpy import array
 
-interval = [0, 1234, 2461, 3685, 4965, 6221, 7440, 8699, 9884, 11151, 12304]
+interval = [0, 1300, 2600, 3900, 5200, 6500, 7800, 9100, 10400, 11700, 13000]
 
 total= [0] * 10
 for i in range(10):
@@ -112,7 +112,7 @@ file_precision = open('final-precision.csv','w')
 file_mask = open('mask.csv', 'w')
 for num in range(10):
     diff = 8
-    for i in range(interval[1] - interval[0]):
+    for i in range(300):
         current_diff = disable_one_most_influential(num, data, ratio[num])
         if current_diff < diff:
             diff = current_diff
@@ -125,6 +125,13 @@ for num in range(10):
 
 for i in range(interval[-1]):
     file_mask.write("{0}\n".format(data[i][-1]))
+
+for num in range(10):
+    sums = 0
+    for i in range(interval[num], interval[num+1]):
+        if data[i][-1]:
+            sums += 1
+    print(sums)
 
 file_mask.close()
 file_precision.close()
